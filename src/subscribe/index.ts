@@ -5,8 +5,10 @@ import { ERC721_EVENT_TRANSFER_SIGNATURE, zeroAddress } from '../utils/abi';
 import {
   JsonRpcProvider,
   marketContract,
+  nftContract,
   webSocketProvider,
 } from '../utils/ethers';
+import NFT from '../json/NFT.json';
 
 export async function nftTradeEvent() {
   webSocketProvider.on('block', async (newBlockNumber: number) => {
@@ -51,6 +53,21 @@ export async function nftTradeEvent() {
   });
 }
 
+export async function LazyNftEvent() {
+  nftContract.on('Transfer', async (from, to, tokenId) => {
+    if (from === zeroAddress) {
+      return;
+    }
+
+    const updateData: NftUpdateInfo = {
+      contract: NFT.contractAddress,
+      tokenId: Number(tokenId),
+      owner: to,
+    };
+    await updateNftInfoByNftTrade(updateData);
+  });
+}
+
 export async function MarketEvent() {
   marketContract.on(
     'NftTrade',
@@ -67,14 +84,6 @@ export async function MarketEvent() {
       };
 
       await insertNftTradeTx(tradeData);
-
-      const updateData: NftUpdateInfo = {
-        contract,
-        tokenId: Number(tokenId),
-        owner: to,
-      };
-
-      await updateNftInfoByNftTrade(updateData);
     },
   );
 }

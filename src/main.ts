@@ -1,4 +1,7 @@
-import { MarketEvent, nftTradeEvent } from './subscribe';
+import { LazyNftEvent, MarketEvent, nftTradeEvent } from './subscribe';
 
+LazyNftEvent();
 MarketEvent();
-nftTradeEvent();
+// nftTradeEvent();
+
+console.log('====START====');
