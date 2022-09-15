@@ -1,4 +1,4 @@
-import { NftTradeEvent, NftUpdateInfo } from '../types';
+import { NftTradeEvent, NftTx, NftUpdateInfo } from '../types';
 import pool from './pool';
 
 export async function updateNftInfoByNftTrade(data: NftUpdateInfo) {
@@ -46,6 +46,22 @@ export async function insertNftTradeTx(data: NftTradeEvent) {
     return true;
   } catch (error) {
     console.log('[ERROR] : INSERT_NFT_TRADE_TX', error);
+    return error;
+  }
+}
+
+export async function insertNftTx(data: NftTx) {
+  const { contract, tokenId, from, to, txHash, eventName } = data;
+  try {
+    await pool.query(
+      'INSERT INTO nft_transaction(contract, tokenId, `from`, `to`, txHash, eventName) VALUES(?,?,?,?,?,?)',
+      [contract, tokenId, from, to, txHash, eventName],
+    );
+
+    console.log(`${eventName} - ${contract} - ${tokenId}`);
+    return true;
+  } catch (error) {
+    console.log('[ERROR] : INSERT_NFT_TX', error);
     return error;
   }
 }

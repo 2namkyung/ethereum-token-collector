@@ -10,7 +10,8 @@ import {
 
 dotenv.config();
 
-const { INFURA_WS, INFURA_URL } = process.env;
+const { INFURA_WS, INFURA_URL, MAINNET_INFURA_WS, MAINNET_INFURA_URL } =
+  process.env;
 
 const abiList: any = {
   tokenURI: ERC721_ABI_TOKEN_URI,
@@ -19,9 +20,11 @@ const abiList: any = {
 };
 
 export const webSocketProvider = new ethers.providers.WebSocketProvider(
-  INFURA_WS,
+  MAINNET_INFURA_WS,
 );
-export const JsonRpcProvider = new ethers.providers.JsonRpcProvider(INFURA_URL);
+export const JsonRpcProvider = new ethers.providers.JsonRpcProvider(
+  MAINNET_INFURA_URL,
+);
 
 export const nftContract = new ethers.Contract(
   NFT.contractAddress,

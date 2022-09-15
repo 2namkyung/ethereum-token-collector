@@ -1,5 +1,9 @@
 import { ethers } from 'ethers';
-import { insertNftTradeTx, updateNftInfoByNftTrade } from '../database/query';
+import {
+  insertNftTradeTx,
+  insertNftTx,
+  updateNftInfoByNftTrade,
+} from '../database/query';
 import { NftTradeEvent, NftUpdateInfo } from '../types';
 import { ERC721_EVENT_TRANSFER_SIGNATURE, zeroAddress } from '../utils/abi';
 import {
@@ -16,11 +20,10 @@ export async function nftTradeEvent() {
     block?.transactions.forEach(async (txHash) => {
       try {
         const receipt = await JsonRpcProvider.getTransactionReceipt(txHash);
-        if (receipt.status && receipt.logs.length !== 0) {
+        if (receipt && receipt.status && receipt.logs.length !== 0) {
           receipt.logs.forEach(async (log) => {
             const { topics } = log;
             const contract = log.address;
-
             if (
               topics[0] === ERC721_EVENT_TRANSFER_SIGNATURE &&
               topics.length === 4
@@ -29,20 +32,16 @@ export async function nftTradeEvent() {
               const from = abiCoder.decode(['address'], topics[1])[0];
               const to = abiCoder.decode(['address'], topics[2])[0];
               const tokenId = abiCoder.decode(['uint256'], topics[3])[0];
-
               const nftData = {
                 contract,
                 from,
                 to,
-                tokenId: Number(tokenId),
+                tokenId: tokenId.toString(),
                 txHash,
+                eventName: from === zeroAddress ? 'MINT' : 'TRANSFER',
               };
 
-              if (from === zeroAddress) {
-                console.log('MINT');
-              } else {
-                console.log('TRANSFER');
-              }
+              await insertNftTx(nftData);
             }
           });
         }
@@ -77,7 +76,7 @@ export async function MarketEvent() {
         from,
         to,
         contract,
-        tokenId: Number(tokenId),
+        tokenId: tokenId.toString(),
         price: etherPrice,
         txHash: event.transactionHash,
         eventName: event.event,
