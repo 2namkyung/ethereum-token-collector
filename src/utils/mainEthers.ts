@@ -1,17 +1,14 @@
 import { ethers } from 'ethers';
-import dotenv from 'dotenv';
 import NFT from '../json/NFT.json';
 import Market from '../json/Market.json';
+import config from '../config';
 import {
   ERC2981_ROYALTY_INFO,
   ERC721_ABI_OWNEROF,
   ERC721_ABI_TOKEN_URI,
 } from './abi';
 
-dotenv.config();
-
-const { INFURA_WS, INFURA_URL, MAINNET_INFURA_WS, MAINNET_INFURA_URL } =
-  process.env;
+const { MAINNET_INFURA_WS, MAINNET_INFURA_URL } = config;
 
 const abiList: any = {
   tokenURI: ERC721_ABI_TOKEN_URI,

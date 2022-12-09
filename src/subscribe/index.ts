@@ -11,7 +11,7 @@ import {
   marketContract,
   nftContract,
   webSocketProvider,
-} from '../utils/ethers';
+} from '../utils/mainEthers';
 import NFT from '../json/NFT.json';
 
 export async function nftTradeEvent() {
