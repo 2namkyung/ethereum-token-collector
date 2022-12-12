@@ -6,7 +6,8 @@
   "scripts": {
     "start": "ts-node src/main.ts",
     "transfer": "ts-node src/ERC20/mumbai/transfer.ts",
-    "balance": "ts-node src/ERC20/mumbai/balance.ts"
+    "balance": "ts-node src/ERC20/mumbai/balance.ts",
+    "test": "ts-node src/test.ts"
   },
   "devDependencies": {
     "@types/node": "^18.7.13",
