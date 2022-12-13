@@ -10,6 +10,7 @@ const {
   MUMBAI_PUBLIC_URL,
   MUMBAI_INFURA_URL,
   MUMBAI_PRIVATE_KEY,
+  MUMBAI_ALCHEMY_KEY,
 } = process.env;
 
 export default {
@@ -20,4 +21,5 @@ export default {
   MUMBAI_PUBLIC_URL,
   MUMBAI_INFURA_URL,
   MUMBAI_PRIVATE_KEY,
+  MUMBAI_ALCHEMY_KEY,
 };
