@@ -4,10 +4,12 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "collector": "ts-node src/index.ts",
     "start": "ts-node src/main.ts",
     "transfer": "ts-node src/ERC20/mumbai/transfer.ts",
     "balance": "ts-node src/ERC20/mumbai/balance.ts",
-    "erc20Deploy": "ts-node src/ERC20/mumbai/deploy.ts",
+    "deploy": "ts-node src/ERC20/mumbai/deploy.ts",
+    "getNonce": "ts-node src/ERC20/mumbai/getNonce.ts",
     "test": "ts-node src/test.ts"
   },
   "devDependencies": {
@@ -29,6 +31,7 @@
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
     "ethers": "^5.7.0",
+    "ioredis": "^5.2.4",
     "mysql2": "^2.3.3"
   }
 }

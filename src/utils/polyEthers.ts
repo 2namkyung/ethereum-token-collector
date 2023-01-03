@@ -32,15 +32,6 @@ export const mumbaiPublicSigner = new ethers.Wallet(
   JsonRpcProvider,
 );
 
-export async function getWalletAddressNonce(address: string) {
-  try {
-    return await JsonRpcProvider.getTransactionCount(address, 'latest');
-  } catch (error) {
-    console.log(error);
-    return error;
-  }
-}
-
 export function initContract() {
   return new ethers.Contract(
     erc20.contractAddress,
