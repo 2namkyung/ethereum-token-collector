@@ -27,6 +27,11 @@ export const mumbaiAlchemySigner = new ethers.Wallet(
   alchemyRpcProvider,
 );
 
+export const mumbaiPublicSigner = new ethers.Wallet(
+  MUMBAI_PRIVATE_KEY,
+  JsonRpcProvider,
+);
+
 export async function getWalletAddressNonce(address: string) {
   try {
     return await JsonRpcProvider.getTransactionCount(address, 'latest');
@@ -37,10 +42,14 @@ export async function getWalletAddressNonce(address: string) {
 }
 
 export function initContract() {
-  return new ethers.Contract(erc20.contractAddress, erc20.abi, mumbaiSigner);
+  return new ethers.Contract(
+    erc20.contractAddress,
+    erc20.abi,
+    mumbaiPublicSigner,
+  );
 }
 
-export const mumbaiGasPrice = 1500000010;
+export const mumbaiGasPrice = 1500000000;
 export async function getGasPrice() {
   try {
     return await JsonRpcProvider.getGasPrice();

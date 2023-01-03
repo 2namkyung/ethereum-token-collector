@@ -17,6 +17,7 @@ export default async function tranfser(address: string, amount: number) {
     const tx = await erc20Contract.transfer(address, amountFormatted);
     return await tx.wait();
   } catch (error) {
+    console.log(error);
     return error;
   }
 }
@@ -66,11 +67,11 @@ async function transferSendTransaction(
   }
 }
 
-tranfser('0x504370060B9d5433679e557621ee31a3B960C157', 10);
+tranfser('0x504370060B9d5433679e557621ee31a3B960C157', 100);
 
-transferSendTransaction(
-  '0x9729352a088bCBcaDfa404F1E4B4BbBeD339b571',
-  '0x244D4241EC8cF7383D7e4854Ee55205386d5741D',
-  '0x504370060B9d5433679e557621ee31a3B960C157',
-  10,
-);
+// transferSendTransaction(
+//   '0x9729352a088bCBcaDfa404F1E4B4BbBeD339b571',
+//   '0x244D4241EC8cF7383D7e4854Ee55205386d5741D',
+//   '0x504370060B9d5433679e557621ee31a3B960C157',
+//   10,
+// );

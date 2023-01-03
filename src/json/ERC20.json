@@ -1,8 +1,24 @@
 {
-  "contractAddress": "0x244D4241EC8cF7383D7e4854Ee55205386d5741D",
+  "contractAddress": "0x8779900dDf88e8a7e95091292ff6422a7b644Ffe",
   "abi": [
     {
-      "inputs": [],
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "symbol",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
       "stateMutability": "nonpayable",
       "type": "constructor"
     },
