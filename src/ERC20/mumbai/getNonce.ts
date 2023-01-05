@@ -1,6 +1,6 @@
 import { JsonRpcProvider } from '../../utils/polyEthers';
 
-async function getWalletAddressNonce(address: string) {
+export default async function getWalletAddressNonce(address: string) {
   try {
     const nonce = await JsonRpcProvider.getTransactionCount(address, 'latest');
     console.log(`Address : ${address} , nonce : ${nonce}`);
