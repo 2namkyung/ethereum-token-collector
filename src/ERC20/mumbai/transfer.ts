@@ -58,12 +58,9 @@ async function transferSendTransaction(
 
   try {
     const transaction = await mumbaiSigner.sendTransaction(tx);
-    console.log('=======TX=======');
-    console.log(transaction);
-    console.log('================');
     const receipt = await transaction.wait();
 
-    console.log(receipt);
+    console.log(`TRANSACTION HASH : ${receipt.transactionHash}`);
     return receipt;
   } catch (error) {
     console.log(error);
